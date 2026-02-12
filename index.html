@@ -17,38 +17,33 @@
         :root {
             /* --- 1. STARTSEITE --- */
             /* Das große Hintergrundbild ganz oben */
-            --bg-hero: url('img/hero.png');
+            --bg-hero: url('img/hero.PNG');
             
             /* Das quadratische Foto neben dem Text "Willkommen" */
-            --img-intro: url('img/restaurant_intro.png');
+            --img-intro: url('img/restaurant_intro.PNG');
 
             /* --- 2. BESTSELLER (Startseite) --- */
             /* 1. Shawarma Rolle (6€) */
-            --img-prod-1: url('img/shawarma_rolle.png');
+            --img-prod-1: url('img/shawarma_rolle.PNG');
             /* 2. Hähnchen Teller (11€) */
-            --img-prod-2: url('img/haehnchen_teller.png');
-            /* 3. Falafel Rolle (5€) */
-            --img-prod-3: url('img/falafel_rolle.png');
+            --img-prod-2: url('img/haehnchen_teller.PNG');
+            /* 3. Pizza Margherita (6€) */
+            --img-prod-3: url('img/pizza_margherita.PNG');
 
             /* --- 3. SPEISEKARTE (Seite) --- */
             /* Das Foto deiner gedruckten Speisekarte */
-            --img-menu-card: url('img/speisekarte_full.png');
+            --img-menu-card: url('img/speisekarte_full.PNG');
 
-            /* --- 4. ÜBER UNS SLIDER (10 Bilder) --- */
-            --slide-1:  url('img/galerie_1.png');
-            --slide-2:  url('img/galerie_2.png');
-            --slide-3:  url('img/galerie_3.png');
-            --slide-4:  url('img/galerie_4.png');
-            --slide-5:  url('img/galerie_5.png');
-            --slide-6:  url('img/galerie_6.png');
-            --slide-7:  url('img/galerie_7.png');
-            --slide-8:  url('img/galerie_8.png');
-            --slide-9:  url('img/galerie_9.png');
-            --slide-10: url('img/galerie_10.png');
+            /* --- 4. ÜBER UNS SLIDER (5 Bilder) --- */
+            --slide-1:  url('img/galerie_1.PNG');
+            --slide-2:  url('img/galerie_2.PNG');
+            --slide-3:  url('img/galerie_3.PNG');
+            --slide-4:  url('img/galerie_4.PNG');
+            --slide-5:  url('img/galerie_5.PNG');
 
             /* --- 5. FOOTER --- */
             /* Karten Platzhalter (statisch) */
-            --img-map: url('img/standort_karte.png');
+            --img-map: url('img/standort_karte.PNG');
         }
 
         /* -------------------------------------------------- */
@@ -78,11 +73,6 @@
         .bg-slide-3 { background-image: var(--slide-3); }
         .bg-slide-4 { background-image: var(--slide-4); }
         .bg-slide-5 { background-image: var(--slide-5); }
-        .bg-slide-6 { background-image: var(--slide-6); }
-        .bg-slide-7 { background-image: var(--slide-7); }
-        .bg-slide-8 { background-image: var(--slide-8); }
-        .bg-slide-9 { background-image: var(--slide-9); }
-        .bg-slide-10 { background-image: var(--slide-10); }
 
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #111; }
@@ -263,10 +253,10 @@
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
                                 <!-- Bild über CSS Variable -->
                                 <div class="w-full h-full bg-img-prod-3 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
-                                <div class="absolute top-4 right-4 bg-green-600 text-white font-bold px-3 py-1 rounded-full z-20">€ 5.00</div>
+                                <div class="absolute top-4 right-4 bg-green-600 text-white font-bold px-3 py-1 rounded-full z-20">€ 6.00</div>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-1">Falafel Rolle</h3>
-                            <p class="text-gray-400 text-sm mb-4">Vegetarisch, frisch und knusprig.</p>
+                            <h3 class="text-xl font-bold text-white mb-1">Pizza Margherita</h3>
+                            <p class="text-gray-400 text-sm mb-4">Klassisch mit fruchtiger Tomatensauce und Mozzarella.</p>
                         </div>
                     </div>
                 </div>
@@ -368,6 +358,7 @@
                                     <svg class="w-12 h-12 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.447-.894L15 7m0 13V7"></path></svg>
                                     <h3 class="text-2xl font-bold text-white mb-2">Anfahrt</h3>
                                     <p class="text-gray-300 mb-6">Heddesdorfer Str. 38, Neuwied</p>
+                                    <!-- KEIN BUTTON MEHR - NUR TEXT -->
                                 </div>
                             </div>
                         </div>
@@ -390,7 +381,7 @@
             <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">Über <span class="text-orange-500">Uns</span></h1>
             <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">Tradition trifft Moderne. Erfahren Sie mehr über unsere Geschichte und unsere Leidenschaft für gutes Essen.</p>
 
-            <!-- FOTO COLLAGE / SLIDER (JETZT MIT 10 BILDERN) -->
+            <!-- FOTO COLLAGE / SLIDER (JETZT MIT 5 BILDERN) -->
             <div class="w-full max-w-5xl mx-auto">
                 <h2 class="text-2xl font-bold text-white mb-6 text-center">Einblicke</h2>
                 
@@ -432,46 +423,6 @@
                         <div class="w-full h-full bg-slide-5 bg-cover bg-center opacity-80"></div>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
                             <p class="text-white text-lg font-bold">Bild 5</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 6 -->
-                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
-                        <div class="w-full h-full bg-slide-6 bg-cover bg-center opacity-80"></div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
-                            <p class="text-white text-lg font-bold">Bild 6</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 7 -->
-                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
-                        <div class="w-full h-full bg-slide-7 bg-cover bg-center opacity-80"></div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
-                            <p class="text-white text-lg font-bold">Bild 7</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 8 -->
-                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
-                        <div class="w-full h-full bg-slide-8 bg-cover bg-center opacity-80"></div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
-                            <p class="text-white text-lg font-bold">Bild 8</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 9 -->
-                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
-                        <div class="w-full h-full bg-slide-9 bg-cover bg-center opacity-80"></div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
-                            <p class="text-white text-lg font-bold">Bild 9</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 10 -->
-                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
-                        <div class="w-full h-full bg-slide-10 bg-cover bg-center opacity-80"></div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
-                            <p class="text-white text-lg font-bold">Bild 10</p>
                         </div>
                     </div>
 
