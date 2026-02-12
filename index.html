@@ -6,28 +6,7 @@
     <title>Familien Restaurant | Neuwied</title>
 
     <!-- 
-    #####################################################################################
-    ### ANWÄLTLICHER HINWEIS: DSGVO-VERSTOSS GEFUNDEN (ABMAHNGEFAHR!) ###
-    #####################################################################################
-    
-    GEGENSTAND: Einbindung von Tailwind CSS über CDN (Content Delivery Network).
-    
-    PROBLEM: 
-    Beim Aufruf Ihrer Webseite baut der Browser des Besuchers automatisch eine Verbindung 
-    zu Servern von 'cdn.tailwindcss.com' auf. Dabei wird unweigerlich die IP-Adresse 
-    des Besuchers (ein personenbezogenes Datum nach Art. 4 Nr. 1 DSGVO) an Dritte übertragen. 
-    Dies geschieht ohne vorherige Einwilligung. Dies stellt eine Datenschutzverletzung dar.
-    
-    RECHTSLAGE:
-    Nach dem "Google Fonts Urteil" (LG München I, Urt. v. 20.01.2022 – 3 O 17493/20) ist 
-    die Weitergabe der IP-Adresse an US-Dienste ohne Einwilligung rechtswidrig.
-    
-    LÖSUNG ZUR VERMEIDUNG EINER KLAGE:
-    1. Entfernen Sie das untenstehende Script.
-    2. Installieren Sie Tailwind CSS lokal über NPM (Node Package Manager).
-    3. Kompilieren Sie das CSS in eine lokale Datei (z.B. 'styles.css').
-    4. Binden Sie diese lokale Datei ein: <link rel="stylesheet" href="styles.css">
-    
+
     Solange Sie das Script nutzen, handeln Sie auf eigenes Risiko.
     #####################################################################################
     -->
@@ -137,6 +116,8 @@
                         <span class="font-bold text-xl tracking-wider uppercase">Familien <span class="text-orange-500">Restaurant</span></span>
                     </div>
                 </a>
+                
+                <!-- Desktop Navigation -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#home" class="hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
@@ -145,6 +126,25 @@
                         <a href="#contact-footer" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-bold transition-transform transform hover:scale-105">Anfahrt</a>
                     </div>
                 </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Menü öffnen</span>
+                        <!-- Hamburger Icon -->
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-link text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#ueber-uns" class="mobile-link text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Über Uns</a>
+                <a href="#speisekarte" class="mobile-link text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Speisekarte</a>
+                <a href="#contact-footer" class="mobile-link bg-orange-500 text-white block px-3 py-2 rounded-md text-base font-medium">Anfahrt</a>
             </div>
         </div>
     </nav>
@@ -363,15 +363,15 @@
                             </div>
                         </div>
 
-                        <!-- RECHTE SPALTE: KARTE (STATISCH) -->
+                        <!-- RECHTE SPALTE: KARTE (STATISCH) - TEXT ENTFERNT -->
                         <div class="h-full min-h-[500px] w-full relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-gray-800 bg-gray-900 group">
-                            <div class="absolute inset-0 w-full h-full bg-img-map bg-cover bg-center opacity-40 transition duration-500 grayscale"></div>
+                            <!-- Bild über CSS Variable - Filter (opacity/grayscale) entfernt -->
+                            <div class="absolute inset-0 w-full h-full bg-img-map bg-cover bg-center transition duration-500"></div>
                         </div>
 
                     </div>
-                </div>
-            </section>
-        </div>
+
+                    <div class="border-t border-gray-900 mt-16 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center">
 
         <!-- ÜBER UNS ANSICHT (NEU) -->
         <div id="view-about" class="hidden-section pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
@@ -509,6 +509,21 @@
 
     <!-- JAVASCRIPT: LOGIK FÜR SEITEN-NAVIGATION UND SLIDER -->
     <script>
+        // --- MOBILE MENU LOGIK (NEU) ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Menü schließen wenn ein Link geklickt wird
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
         // --- ROUTING LOGIK ---
         function handleRouting() {
             const hash = window.location.hash;
@@ -583,4 +598,3 @@
 
 </body>
 </html>
-
