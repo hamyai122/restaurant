@@ -5,8 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Familien Restaurant | Neuwied</title>
 
-    <!-- 1. Tailwind CSS (Extern) -->
+    <!-- 
+    #####################################################################################
+    ### ANWÄLTLICHER HINWEIS: DSGVO-VERSTOSS GEFUNDEN (ABMAHNGEFAHR!) ###
+    #####################################################################################
+    
+    GEGENSTAND: Einbindung von Tailwind CSS über CDN (Content Delivery Network).
+    
+    PROBLEM: 
+    Beim Aufruf Ihrer Webseite baut der Browser des Besuchers automatisch eine Verbindung 
+    zu Servern von 'cdn.tailwindcss.com' auf. Dabei wird unweigerlich die IP-Adresse 
+    des Besuchers (ein personenbezogenes Datum nach Art. 4 Nr. 1 DSGVO) an Dritte übertragen. 
+    Dies geschieht ohne vorherige Einwilligung. Dies stellt eine Datenschutzverletzung dar.
+    
+    RECHTSLAGE:
+    Nach dem "Google Fonts Urteil" (LG München I, Urt. v. 20.01.2022 – 3 O 17493/20) ist 
+    die Weitergabe der IP-Adresse an US-Dienste ohne Einwilligung rechtswidrig.
+    
+    LÖSUNG ZUR VERMEIDUNG EINER KLAGE:
+    1. Entfernen Sie das untenstehende Script.
+    2. Installieren Sie Tailwind CSS lokal über NPM (Node Package Manager).
+    3. Kompilieren Sie das CSS in eine lokale Datei (z.B. 'styles.css').
+    4. Binden Sie diese lokale Datei ein: <link rel="stylesheet" href="styles.css">
+    
+    Solange Sie das Script nutzen, handeln Sie auf eigenes Risiko.
+    #####################################################################################
+    -->
     <script src="./js/tailwindcss.js"></script>
+    <!-- ##################################################################################### -->
+
 
     <style>
         /* ==========================================================================
@@ -56,7 +83,7 @@
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; 
         }
         
-        /* Hilfsklassen um CSS Variablen als Hintergrund zu nutzen */
+        /* Helper Classes */
         .bg-img-hero { background-image: var(--bg-hero); }
         .bg-img-intro { background-image: var(--img-intro); }
         
@@ -67,18 +94,20 @@
         .bg-img-menu { background-image: var(--img-menu-card); }
         .bg-img-map { background-image: var(--img-map); }
 
-        /* Slider Background Klassen */
+        /* Slider Backgrounds */
         .bg-slide-1 { background-image: var(--slide-1); }
         .bg-slide-2 { background-image: var(--slide-2); }
         .bg-slide-3 { background-image: var(--slide-3); }
         .bg-slide-4 { background-image: var(--slide-4); }
         .bg-slide-5 { background-image: var(--slide-5); }
 
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #ea580c; }
         
+        /* Utilities */
         .hidden-section { display: none !important; }
 
         .slide {
@@ -136,8 +165,6 @@
 
                 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-16">
                     <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-                        
-                        <!-- TEXT BEREICH -->
                         <div class="md:w-1/2 text-center md:text-left">
                             <span class="inline-block py-1 px-3 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold mb-4 border border-orange-500/30">
                                 🔥 Neueröffnung in Neuwied
@@ -162,15 +189,12 @@
                             </div>
                         </div>
 
-                        <!-- FOTO BEREICH (Intro) - Jetzt wieder als DIV mit Background Image -->
                         <div class="md:w-1/2 w-full flex justify-center md:justify-end">
                             <div class="relative group w-full max-w-md">
                                 <div class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                                <!-- Hier wird das Bild über CSS geladen: -->
                                 <div class="relative rounded-3xl shadow-2xl w-full bg-img-intro bg-cover bg-center aspect-square border-4 border-gray-800 transform rotate-2 hover:rotate-0 transition duration-500"></div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </section>
@@ -223,11 +247,9 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Product 1 -->
                         <div class="group">
                             <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
-                                <!-- Bild über CSS Variable -->
                                 <div class="w-full h-full bg-img-prod-1 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
                                 <div class="absolute top-4 right-4 bg-orange-500 text-white font-bold px-3 py-1 rounded-full z-20">€ 6.00</div>
                             </div>
@@ -235,11 +257,9 @@
                             <p class="text-gray-400 text-sm mb-4">Saftiges Hähnchenfleisch im Brot gerollt.</p>
                         </div>
 
-                        <!-- Product 2 -->
                         <div class="group">
                             <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
-                                <!-- Bild über CSS Variable -->
                                 <div class="w-full h-full bg-img-prod-2 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
                                 <div class="absolute top-4 right-4 bg-orange-500 text-white font-bold px-3 py-1 rounded-full z-20">€ 11.00</div>
                             </div>
@@ -247,11 +267,9 @@
                             <p class="text-gray-400 text-sm mb-4">Hähnchenrolle, Pommes, Knoblauchsauce, Salat.</p>
                         </div>
 
-                        <!-- Product 3 -->
                         <div class="group">
                             <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
-                                <!-- Bild über CSS Variable -->
                                 <div class="w-full h-full bg-img-prod-3 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
                                 <div class="absolute top-4 right-4 bg-green-600 text-white font-bold px-3 py-1 rounded-full z-20">€ 6.00</div>
                             </div>
@@ -262,7 +280,7 @@
                 </div>
             </section>
 
-            <!-- FOOTER -->
+            <!-- FOOTER WITH CONTACT INFO (STARTSEITE) -->
             <section id="contact-footer" class="bg-black text-gray-100 py-16 border-t border-gray-900">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -274,7 +292,6 @@
                                 Erleben Sie unsere Spezialitäten vor Ort. Genießen Sie eine entspannte Atmosphäre und den besten Geschmack der Stadt.
                             </p>
 
-                            <!-- Adresse -->
                             <div class="flex items-start gap-4 mb-10">
                                 <div class="mt-1">
                                     <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -286,7 +303,6 @@
                                 </div>
                             </div>
 
-                            <!-- Öffnungszeiten -->
                             <div class="mb-10">
                                 <h3 class="text-xl font-serif text-white mb-4 flex items-center gap-2">
                                     <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -324,7 +340,6 @@
                                 </div>
                             </div>
 
-                            <!-- Kontakt Boxen (Statisch) -->
                             <div class="space-y-4">
                                 <div class="bg-gray-900 p-5 rounded-lg border border-gray-800 flex items-center gap-4">
                                     <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-orange-500">
@@ -348,20 +363,11 @@
                             </div>
                         </div>
 
-                        <!-- RECHTE SPALTE: KARTE (STATISCH) - TEXT ENTFERNT -->
+                        <!-- RECHTE SPALTE: KARTE (STATISCH) -->
                         <div class="h-full min-h-[500px] w-full relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-gray-800 bg-gray-900 group">
-                            <!-- Bild über CSS Variable -->
                             <div class="absolute inset-0 w-full h-full bg-img-map bg-cover bg-center opacity-40 transition duration-500 grayscale"></div>
                         </div>
 
-                    </div>
-
-                    <div class="border-t border-gray-900 mt-16 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center">
-                        <p>&copy; 2024 Familien Restaurant. Alle Rechte vorbehalten.</p>
-                        <div class="flex gap-4 mt-4 md:mt-0">
-                            <a href="#impressum" class="hover:text-orange-500">Impressum</a>
-                            <a href="#datenschutz" class="hover:text-orange-500">Datenschutz</a>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -372,7 +378,7 @@
             <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">Über <span class="text-orange-500">Uns</span></h1>
             <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">Tradition trifft Moderne. Erfahren Sie mehr über unsere Geschichte und unsere Leidenschaft für gutes Essen.</p>
 
-            <!-- FOTO COLLAGE / SLIDER (JETZT MIT 5 BILDERN) -->
+            <!-- FOTO COLLAGE / SLIDER (5 BILDERN) -->
             <div class="w-full max-w-5xl mx-auto">
                 <h2 class="text-2xl font-bold text-white mb-6 text-center">Einblicke</h2>
                 
@@ -426,12 +432,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Mini Footer -->
-            <div class="mt-auto text-center border-t border-gray-800 pt-8 mt-16">
-                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
-                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
-            </div>
         </div>
 
         <!-- SPEISEKARTE ANSICHT -->
@@ -442,17 +442,11 @@
             <!-- FOTO PLATZHALTER FÜR DIE SPEISEKARTE -->
             <div class="w-full max-w-5xl mx-auto bg-gray-900 p-4 md:p-8 rounded-3xl border border-gray-800 shadow-2xl">
                 <!-- Bild über CSS Variable -->
-                <div class="w-full bg-img-menu bg-contain bg-no-repeat bg-center h-[800px] rounded-xl shadow-lg border border-gray-800/50"></div>
-            </div>
-
-            <!-- Mini Footer für Speisekarte -->
-            <div class="mt-auto text-center border-t border-gray-800 pt-8 mt-16">
-                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
-                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
+                <div class="w-full bg-img-menu bg-contain bg-no-repeat bg-center aspect-video rounded-xl shadow-lg border border-gray-800/50"></div>
             </div>
         </div>
 
-        <!-- IMPRESSUM / DATENSCHUTZ (UNVERÄNDERT) -->
+        <!-- IMPRESSUM ANSICHT (Standardmäßig versteckt) -->
         <div id="view-impressum" class="hidden-section pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
             <h1 class="text-4xl font-bold mb-8 text-orange-500">Impressum</h1>
             <div class="prose prose-invert prose-orange max-w-none bg-gray-900 p-8 rounded-2xl border border-gray-800 flex-grow">
@@ -475,12 +469,9 @@
                 <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr.<br>
                 Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
             </div>
-            <div class="mt-12 text-center border-t border-gray-800 pt-8">
-                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
-                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
-            </div>
         </div>
 
+        <!-- DATENSCHUTZ ANSICHT (Standardmäßig versteckt) -->
         <div id="view-datenschutz" class="hidden-section pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
             <h1 class="text-4xl font-bold mb-8 text-orange-500">Datenschutzerklärung</h1>
             <div class="prose prose-invert prose-orange max-w-none bg-gray-900 p-8 rounded-2xl border border-gray-800 flex-grow">
@@ -501,13 +492,20 @@
                 <h3 class="text-xl font-bold mt-4 mb-2 text-white">Datenschutz</h3>
                 <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften.</p>
             </div>
-            <div class="mt-12 text-center border-t border-gray-800 pt-8">
-                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
-                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
-            </div>
         </div>
 
     </main>
+
+    <!-- GLOBALER FOOTER (FÜR ALLE SEITEN SICHTBAR) -->
+    <footer id="global-footer" class="bg-black text-gray-100 py-8 border-t border-gray-900 z-40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2026 Familien Restaurant. Alle Rechte vorbehalten.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#impressum" class="hover:text-orange-500">Impressum</a>
+                <a href="#datenschutz" class="hover:text-orange-500">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- JAVASCRIPT: LOGIK FÜR SEITEN-NAVIGATION UND SLIDER -->
     <script>
@@ -519,7 +517,7 @@
             const impressumView = document.getElementById('view-impressum');
             const datenschutzView = document.getElementById('view-datenschutz');
             const speisekarteView = document.getElementById('view-speisekarte'); 
-            const aboutView = document.getElementById('view-about'); // Neu
+            const aboutView = document.getElementById('view-about'); 
             
             // Erstmal alle verstecken
             const views = [mainView, impressumView, datenschutzView, speisekarteView, aboutView];
@@ -535,7 +533,7 @@
             } else if (hash === '#speisekarte') {
                 speisekarteView.classList.remove('hidden-section');
                 window.scrollTo(0,0);
-            } else if (hash === '#ueber-uns') { // Neu
+            } else if (hash === '#ueber-uns') {
                 aboutView.classList.remove('hidden-section');
                 window.scrollTo(0,0);
             } else {
@@ -585,4 +583,3 @@
 
 </body>
 </html>
-
