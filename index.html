@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familien Restaurant | Neuwied</title>
+
+    <!-- 1. Tailwind CSS (Extern) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* ==========================================================================
+           KONFIGURATION: LOKALE BILDER (ZENTRALE STEUERUNG)
+           Hier musst du nur die Dateinamen ändern. Die Bilder werden automatisch
+           an der richtigen Stelle im Design eingefügt.
+           ========================================================================== */
+        :root {
+            /* --- 1. STARTSEITE --- */
+            /* Das große Hintergrundbild ganz oben */
+            --bg-hero: url('img/hero.jpg');
+            
+            /* Das quadratische Foto neben dem Text "Willkommen" */
+            --img-intro: url('img/restaurant_intro.jpg');
+
+            /* --- 2. BESTSELLER (Startseite) --- */
+            /* 1. Shawarma Rolle (6€) */
+            --img-prod-1: url('img/shawarma_rolle.jpg');
+            /* 2. Hähnchen Teller (11€) */
+            --img-prod-2: url('img/haehnchen_teller.jpg');
+            /* 3. Falafel Rolle (5€) */
+            --img-prod-3: url('img/falafel_rolle.jpg');
+
+            /* --- 3. SPEISEKARTE (Seite) --- */
+            /* Das Foto deiner gedruckten Speisekarte */
+            --img-menu-card: url('img/speisekarte_full.jpg');
+
+            /* --- 4. ÜBER UNS SLIDER (10 Bilder) --- */
+            --slide-1:  url('img/galerie_1.jpg');
+            --slide-2:  url('img/galerie_2.jpg');
+            --slide-3:  url('img/galerie_3.jpg');
+            --slide-4:  url('img/galerie_4.jpg');
+            --slide-5:  url('img/galerie_5.jpg');
+            --slide-6:  url('img/galerie_6.jpg');
+            --slide-7:  url('img/galerie_7.jpg');
+            --slide-8:  url('img/galerie_8.jpg');
+            --slide-9:  url('img/galerie_9.jpg');
+            --slide-10: url('img/galerie_10.jpg');
+
+            /* --- 5. FOOTER --- */
+            /* Karten Platzhalter (statisch) */
+            --img-map: url('img/standort_karte.jpg');
+        }
+
+        /* -------------------------------------------------- */
+
+        /* System Fonts (DSGVO Konform) */
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; 
+        }
+        .font-arabic { 
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        
+        /* Hilfsklassen um CSS Variablen als Hintergrund zu nutzen */
+        .bg-img-hero { background-image: var(--bg-hero); }
+        .bg-img-intro { background-image: var(--img-intro); }
+        
+        .bg-img-prod-1 { background-image: var(--img-prod-1); }
+        .bg-img-prod-2 { background-image: var(--img-prod-2); }
+        .bg-img-prod-3 { background-image: var(--img-prod-3); }
+        
+        .bg-img-menu { background-image: var(--img-menu-card); }
+        .bg-img-map { background-image: var(--img-map); }
+
+        /* Slider Background Klassen */
+        .bg-slide-1 { background-image: var(--slide-1); }
+        .bg-slide-2 { background-image: var(--slide-2); }
+        .bg-slide-3 { background-image: var(--slide-3); }
+        .bg-slide-4 { background-image: var(--slide-4); }
+        .bg-slide-5 { background-image: var(--slide-5); }
+        .bg-slide-6 { background-image: var(--slide-6); }
+        .bg-slide-7 { background-image: var(--slide-7); }
+        .bg-slide-8 { background-image: var(--slide-8); }
+        .bg-slide-9 { background-image: var(--slide-9); }
+        .bg-slide-10 { background-image: var(--slide-10); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ea580c; }
+        
+        .hidden-section { display: none !important; }
+
+        .slide {
+            transition: opacity 0.7s ease-in-out;
+        }
+        .slide-active {
+            opacity: 1;
+            z-index: 10;
+        }
+        .slide-hidden {
+            opacity: 0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 antialiased selection:bg-orange-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex items-center gap-2 group">
+                    <svg class="w-8 h-8 text-orange-500 group-hover:text-orange-400 transition" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="flex flex-col leading-none">
+                        <span class="font-bold text-xl tracking-wider uppercase">Familien <span class="text-orange-500">Restaurant</span></span>
+                    </div>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#ueber-uns" class="hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Über Uns</a>
+                        <a href="#speisekarte" class="hover:text-orange-500 transition-colors px-3 py-2 rounded-md text-sm font-medium">Speisekarte</a>
+                        <a href="#contact-footer" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-bold transition-transform transform hover:scale-105">Anfahrt</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DYNAMIC CONTENT WRAPPER -->
+    <main class="flex-grow">
+        
+        <!-- HAUPTANSICHT -->
+        <div id="view-main">
+            
+            <!-- HERO SECTION -->
+            <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
+                <div class="absolute inset-0 z-0">
+                    <div class="w-full h-full bg-img-hero bg-cover bg-center opacity-40"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/80 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-16">
+                    <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                        
+                        <!-- TEXT BEREICH -->
+                        <div class="md:w-1/2 text-center md:text-left">
+                            <span class="inline-block py-1 px-3 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold mb-4 border border-orange-500/30">
+                                🔥 Neueröffnung in Neuwied
+                            </span>
+                            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-2 leading-tight">
+                                Familien <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">Restaurant.</span>
+                            </h1>
+                            <h2 class="text-3xl md:text-4xl font-arabic text-orange-500 mb-6 font-bold">مطعم العائلة</h2>
+                            
+                            <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                                Echter Geschmack mitten in Neuwied. Handgesteckte Spieße, jeden Morgen frisch gebackenes Brot und unsere legendäre Knoblauchcreme.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <a href="#contact-footer" class="bg-orange-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
+                                    Jetzt vorbeikommen
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </a>
+                                <a href="#speisekarte" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:border-orange-500 hover:text-orange-500 transition flex items-center justify-center gap-2">
+                                    Speisekarte
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- FOTO BEREICH (Intro) - Jetzt wieder als DIV mit Background Image -->
+                        <div class="md:w-1/2 w-full flex justify-center md:justify-end">
+                            <div class="relative group w-full max-w-md">
+                                <div class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                                <!-- Hier wird das Bild über CSS geladen: -->
+                                <div class="relative rounded-3xl shadow-2xl w-full bg-img-intro bg-cover bg-center aspect-square border-4 border-gray-800 transform rotate-2 hover:rotate-0 transition duration-500"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- HIGHLIGHTS -->
+            <section id="about-highlights" class="py-24 bg-gray-900">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Warum es bei uns anders schmeckt</h2>
+                        <div class="w-24 h-1 bg-orange-500 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div class="bg-gray-800 p-8 rounded-2xl hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-orange-500/50 group">
+                            <div class="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-500 transition">
+                                <svg class="w-8 h-8 text-orange-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">100% Echtes Fleisch</h3>
+                            <p class="text-gray-400">Kein Hackfleisch-Gemisch. Wir verwenden nur marinierte Scheiben von Kalb und Hähnchen, täglich frisch gesteckt.</p>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-2xl hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-orange-500/50 group">
+                            <div class="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-500 transition">
+                                <svg class="w-8 h-8 text-orange-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Geheime Toum-Creme</h3>
+                            <p class="text-gray-400">Unsere Knoblauchcreme (Toum) wird nach einem alten Familienrezept hergestellt. Cremig, intensiv, unvergesslich.</p>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-2xl hover:-translate-y-2 transition duration-300 border border-gray-700 hover:border-orange-500/50 group">
+                            <div class="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-500 transition">
+                                <svg class="w-8 h-8 text-orange-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Hausgemachtes Brot</h3>
+                            <p class="text-gray-400">Wir kaufen nichts ein. Unser Pita-Brot kommt direkt aus dem Ofen auf deinen Teller. Warm und fluffig.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MENU TEASER -->
+            <section id="menu-teaser" class="py-24 bg-gray-950">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold mb-2">Unsere Bestseller</h2>
+                            <p class="text-gray-400">Vorsicht: Suchtgefahr.</p>
+                        </div>
+                        <a href="#speisekarte" class="text-orange-500 hover:text-white transition mt-4 md:mt-0 font-medium flex items-center gap-2">
+                            Ganzes Menü ansehen <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Product 1 -->
+                        <div class="group">
+                            <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
+                                <!-- Bild über CSS Variable -->
+                                <div class="w-full h-full bg-img-prod-1 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-orange-500 text-white font-bold px-3 py-1 rounded-full z-20">€ 6.00</div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Shawarma Hähnchen Rolle</h3>
+                            <p class="text-gray-400 text-sm mb-4">Saftiges Hähnchenfleisch im Brot gerollt.</p>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="group">
+                            <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
+                                <!-- Bild über CSS Variable -->
+                                <div class="w-full h-full bg-img-prod-2 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-orange-500 text-white font-bold px-3 py-1 rounded-full z-20">€ 11.00</div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Hähnchenrolle Teller</h3>
+                            <p class="text-gray-400 text-sm mb-4">Hähnchenrolle, Pommes, Knoblauchsauce, Salat.</p>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="group">
+                            <div class="relative overflow-hidden rounded-2xl h-64 mb-4">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition z-10"></div>
+                                <!-- Bild über CSS Variable -->
+                                <div class="w-full h-full bg-img-prod-3 bg-cover bg-center transform group-hover:scale-110 transition duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-green-600 text-white font-bold px-3 py-1 rounded-full z-20">€ 5.00</div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Falafel Rolle</h3>
+                            <p class="text-gray-400 text-sm mb-4">Vegetarisch, frisch und knusprig.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <section id="contact-footer" class="bg-black text-gray-100 py-16 border-t border-gray-900">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+                        
+                        <!-- INFOS -->
+                        <div class="flex flex-col justify-center">
+                            <h2 class="text-3xl md:text-4xl font-serif text-white mb-6">Besuchen Sie Uns</h2>
+                            <p class="text-gray-400 mb-8 leading-relaxed">
+                                Erleben Sie unsere Spezialitäten vor Ort. Genießen Sie eine entspannte Atmosphäre und den besten Geschmack der Stadt.
+                            </p>
+
+                            <!-- Adresse -->
+                            <div class="flex items-start gap-4 mb-10">
+                                <div class="mt-1">
+                                    <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-white">Heddesdorfer Str. 38</p>
+                                    <p class="text-gray-400">56564 Neuwied</p>
+                                    <p class="text-gray-400">Deutschland</p>
+                                </div>
+                            </div>
+
+                            <!-- Öffnungszeiten -->
+                            <div class="mb-10">
+                                <h3 class="text-xl font-serif text-white mb-4 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Öffnungszeiten
+                                </h3>
+                                <div class="space-y-3 text-sm text-gray-300">
+                                    <div class="flex justify-between border-b border-gray-800 pb-2">
+                                        <span>Montag</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-800 pb-2 text-orange-400 font-medium">
+                                        <span>Dienstag</span>
+                                        <span>Geschlossen</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-800 pb-2">
+                                        <span>Mittwoch</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-800 pb-2">
+                                        <span>Donnerstag</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-800 pb-2">
+                                        <span>Freitag</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-800 pb-2">
+                                        <span>Samstag</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                    <div class="flex justify-between pb-2">
+                                        <span>Sonntag</span>
+                                        <span>11:00 — 22:00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kontakt Boxen (Statisch) -->
+                            <div class="space-y-4">
+                                <div class="bg-gray-900 p-5 rounded-lg border border-gray-800 flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-orange-500">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">Telefon</p>
+                                        <span class="text-lg font-bold text-white">+49 2631 123 456</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-900 p-5 rounded-lg border border-gray-800 flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-orange-500">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">E-Mail</p>
+                                        <span class="text-lg font-bold text-white">hallo@familienrestaurant.de</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RECHTE SPALTE: KARTE (STATISCH) -->
+                        <div class="h-full min-h-[500px] w-full relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-gray-800 bg-gray-900 group">
+                            <!-- Bild über CSS Variable -->
+                            <div class="absolute inset-0 w-full h-full bg-img-map bg-cover bg-center opacity-40 transition duration-500 grayscale"></div>
+                            
+                            <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-10">
+                                <div class="bg-black/60 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 max-w-sm w-full">
+                                    <svg class="w-12 h-12 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.447-.894L15 7m0 13V7"></path></svg>
+                                    <h3 class="text-2xl font-bold text-white mb-2">Anfahrt</h3>
+                                    <p class="text-gray-300 mb-6">Heddesdorfer Str. 38, Neuwied</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="border-t border-gray-900 mt-16 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center">
+                        <p>&copy; 2024 Familien Restaurant. Alle Rechte vorbehalten.</p>
+                        <div class="flex gap-4 mt-4 md:mt-0">
+                            <a href="#impressum" class="hover:text-orange-500">Impressum</a>
+                            <a href="#datenschutz" class="hover:text-orange-500">Datenschutz</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ÜBER UNS ANSICHT (NEU) -->
+        <div id="view-about" class="hidden-section pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+            <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">Über <span class="text-orange-500">Uns</span></h1>
+            <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">Tradition trifft Moderne. Erfahren Sie mehr über unsere Geschichte und unsere Leidenschaft für gutes Essen.</p>
+
+            <!-- FOTO COLLAGE / SLIDER -->
+            <div class="w-full max-w-5xl mx-auto">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">Einblicke</h2>
+                
+                <div class="relative w-full h-[500px] overflow-hidden rounded-3xl shadow-2xl border border-gray-800 group">
+                    <!-- Slides über CSS Backgrounds -->
+                    <div class="slide slide-active absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-1 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-2 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 2</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-3 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 3</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-4 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 4</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-5 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 5</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-6 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 6</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-7 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 7</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-8 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 8</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-9 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 9</p>
+                        </div>
+                    </div>
+
+                    <div class="slide slide-hidden absolute inset-0 w-full h-full bg-gray-900">
+                        <div class="w-full h-full bg-slide-10 bg-cover bg-center opacity-80"></div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
+                            <p class="text-white text-lg font-bold">Bild 10</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-orange-500 text-white p-3 rounded-full backdrop-blur-sm transition z-20">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-orange-500 text-white p-3 rounded-full backdrop-blur-sm transition z-20">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mini Footer -->
+            <div class="mt-auto text-center border-t border-gray-800 pt-8 mt-16">
+                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
+                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
+            </div>
+        </div>
+
+        <!-- SPEISEKARTE ANSICHT -->
+        <div id="view-speisekarte" class="hidden-section pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+            <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">Unsere <span class="text-orange-500">Speisekarte</span></h1>
+            <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Frisch zubereitet, authentisch gewürzt. Entdecken Sie die Vielfalt der syrischen Küche.</p>
+            
+            <!-- FOTO PLATZHALTER FÜR DIE SPEISEKARTE -->
+            <div class="w-full max-w-5xl mx-auto bg-gray-900 p-4 md:p-8 rounded-3xl border border-gray-800 shadow-2xl">
+                <!-- Bild über CSS Variable -->
+                <div class="w-full bg-img-menu bg-contain bg-no-repeat bg-center h-[800px] rounded-xl shadow-lg border border-gray-800/50"></div>
+            </div>
+
+            <!-- Mini Footer für Speisekarte -->
+            <div class="mt-auto text-center border-t border-gray-800 pt-8 mt-16">
+                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
+                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
+            </div>
+        </div>
+
+        <!-- IMPRESSUM / DATENSCHUTZ (UNVERÄNDERT) -->
+        <div id="view-impressum" class="hidden-section pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+            <h1 class="text-4xl font-bold mb-8 text-orange-500">Impressum</h1>
+            <div class="prose prose-invert prose-orange max-w-none bg-gray-900 p-8 rounded-2xl border border-gray-800 flex-grow">
+                <p>Angaben gemäß § 5 TMG</p>
+                <h3 class="text-xl font-bold mt-6 mb-2 text-white">Betreiber:</h3>
+                <p>Familien Restaurant<br>
+                Inhaber: [Vorname Nachname]<br>
+                Heddesdorfer Str. 38<br>
+                56564 Neuwied</p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-white">Kontakt:</h3>
+                <p>Telefon: +49 2631 123 456<br>
+                E-Mail: hallo@familienrestaurant.de</p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-white">Umsatzsteuer:</h3>
+                <p>Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br>
+                [DE 123 456 789]</p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-white">Streitschlichtung:</h3>
+                <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr.<br>
+                Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+            </div>
+            <div class="mt-12 text-center border-t border-gray-800 pt-8">
+                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
+                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
+            </div>
+        </div>
+
+        <div id="view-datenschutz" class="hidden-section pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+            <h1 class="text-4xl font-bold mb-8 text-orange-500">Datenschutzerklärung</h1>
+            <div class="prose prose-invert prose-orange max-w-none bg-gray-900 p-8 rounded-2xl border border-gray-800 flex-grow">
+                <h2 class="text-2xl font-bold mb-4 text-white">1. Datenschutz auf einen Blick</h2>
+                <h3 class="text-xl font-bold mt-4 mb-2 text-white">Allgemeine Hinweise</h3>
+                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-white">Datenerfassung auf dieser Website</h3>
+                <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+                Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-white">2. Hosting</h2>
+                <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter:</p>
+                <p>[Name des Hosters]<br>
+                Diese Seite verwendet zur Bereitstellung statischer Inhalte externe Dienste (z.B. Tailwind CSS via CDN, Unsplash Images).</p>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4 text-white">3. Allgemeine Hinweise und Pflichtinformationen</h2>
+                <h3 class="text-xl font-bold mt-4 mb-2 text-white">Datenschutz</h3>
+                <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften.</p>
+            </div>
+            <div class="mt-12 text-center border-t border-gray-800 pt-8">
+                <a href="#home" class="text-orange-500 font-bold hover:underline">← Zurück zur Startseite</a>
+                <p class="text-xs text-gray-600 mt-4">&copy; 2024 Familien Restaurant.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT: LOGIK FÜR SEITEN-NAVIGATION UND SLIDER -->
+    <script>
+        // --- ROUTING LOGIK ---
+        function handleRouting() {
+            const hash = window.location.hash;
+            
+            const mainView = document.getElementById('view-main');
+            const impressumView = document.getElementById('view-impressum');
+            const datenschutzView = document.getElementById('view-datenschutz');
+            const speisekarteView = document.getElementById('view-speisekarte'); 
+            const aboutView = document.getElementById('view-about'); // Neu
+            
+            // Erstmal alle verstecken
+            const views = [mainView, impressumView, datenschutzView, speisekarteView, aboutView];
+            views.forEach(v => v.classList.add('hidden-section'));
+
+            // Logik: Was soll angezeigt werden?
+            if (hash === '#impressum') {
+                impressumView.classList.remove('hidden-section');
+                window.scrollTo(0,0);
+            } else if (hash === '#datenschutz') {
+                datenschutzView.classList.remove('hidden-section');
+                window.scrollTo(0,0);
+            } else if (hash === '#speisekarte') {
+                speisekarteView.classList.remove('hidden-section');
+                window.scrollTo(0,0);
+            } else if (hash === '#ueber-uns') { // Neu
+                aboutView.classList.remove('hidden-section');
+                window.scrollTo(0,0);
+            } else {
+                // Hauptseite
+                mainView.classList.remove('hidden-section');
+                
+                // Scrollen zu Sections auf Hauptseite
+                if(hash && hash !== '#home') {
+                    setTimeout(() => {
+                        const target = document.querySelector(hash);
+                        if(target && mainView.contains(target)) {
+                            target.scrollIntoView({behavior: "smooth"});
+                        }
+                    }, 50);
+                }
+            }
+        }
+
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('load', handleRouting);
+
+        // --- SLIDER LOGIK (NEU) ---
+        let currentSlide = 0;
+        
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            
+            // Aktuellen Slide ausblenden
+            slides[currentSlide].classList.remove('slide-active');
+            slides[currentSlide].classList.add('slide-hidden');
+            
+            // Index berechnen
+            currentSlide += direction;
+            
+            // Loop Logik (Endlos-Schleife)
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            
+            // Neuen Slide einblenden
+            slides[currentSlide].classList.remove('slide-hidden');
+            slides[currentSlide].classList.add('slide-active');
+        }
+    </script>
+
+</body>
+</html>
